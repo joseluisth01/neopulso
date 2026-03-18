@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# No indexar páginas de sistema
+Disallow: /404
+Disallow: /gracias
+
+Sitemap: https://www.neopulso.es/sitemap.xml

@@ -1,0 +1,65 @@
+# ================================================================
+# NeoPulso — .htaccess
+# Hosting compartido Apache (Hostinger, Webempresa, etc.)
+# ================================================================
+
+Options -Indexes
+Options -MultiViews
+
+RewriteEngine On
+
+# ── 1. FORZAR HTTPS ──────────────────────────────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── 2. FORZAR sin www (o con www, elige uno) ─────────────────────
+# Sin www:
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# ── 3. URLs LIMPIAS SIN .html ────────────────────────────────────
+# Si la petición no es un archivo ni directorio real...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...y existe el .html correspondiente, sírvelo
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# ── 4. PÁGINA 404 PERSONALIZADA ──────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── 5. CABECERAS DE SEGURIDAD ────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# ── 6. CACHÉ DE NAVEGADOR (Performance / Core Web Vitals) ────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css              "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png             "access plus 1 year"
+  ExpiresByType image/jpg             "access plus 1 year"
+  ExpiresByType image/jpeg            "access plus 1 year"
+  ExpiresByType image/webp            "access plus 1 year"
+  ExpiresByType image/svg+xml        "access plus 1 year"
+  ExpiresByType image/x-icon         "access plus 1 year"
+  ExpiresByType font/woff2           "access plus 1 year"
+  ExpiresByType text/html            "access plus 1 hour"
+</IfModule>
+
+# ── 7. COMPRESIÓN GZIP ───────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript
+  AddOutputFilterByType DEFLATE image/svg+xml application/json
+</IfModule>
+
+# ── 8. PROTEGER ARCHIVOS SENSIBLES ───────────────────────────────
+<FilesMatch "\.(env|log|sql|bak|sh|git)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
