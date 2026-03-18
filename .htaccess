@@ -12,10 +12,9 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# ── 2. FORZAR sin www (o con www, elige uno) ─────────────────────
-# Sin www:
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+# Forzar CON www (reemplaza la regla actual):
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # ── 3. URLs LIMPIAS SIN .html ────────────────────────────────────
 # Si la petición no es un archivo ni directorio real...

@@ -8,10 +8,10 @@
  */
 
 // ── CONFIGURACIÓN ───────────────────────────────────────────────
-define('RECIPIENT_EMAIL', 'hola@neopulso.com');   // ✏️ Tu email
+define('RECIPIENT_EMAIL', 'info@neopulso.es');   // ✏️ Tu email
 define('RECIPIENT_NAME',  'NeoPulso');
 define('SITE_NAME',       'NeoPulso');
-define('SITE_URL',        'https://www.neopulso.com');
+define('SITE_URL',        'https://www.neopulso.es');
 
 // ── CABECERAS CORS y JSON ────────────────────────────────────────
 header('Content-Type: application/json; charset=UTF-8');
