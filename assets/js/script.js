@@ -27,7 +27,7 @@
         menu.style.pointerEvents = 'none';
         menu.style.transform = 'translateX(-50%) translateY(-10px)';
         item.querySelector('.nav-arrow') && (item.querySelector('.nav-arrow').style.transform = '');
-      }, 120);  // pequeño delay para que el ratón pueda pasar al menú
+      }, 120);  // pequseño delay para que el ratón pueda pasar al menú
     };
 
     item.addEventListener('mouseenter', open);

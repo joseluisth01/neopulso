@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# No indexar páginas de sistema
+# Nso indexar páginas de sistema
 Disallow: /404
 Disallow: /gracias
 

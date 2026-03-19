@@ -79,7 +79,7 @@ if (!empty($errors)) {
     exit;
 }
 
-// ── CONSTRUCCIÓN DEL EMAIL ───────────────────────────────────────
+// ── CONSsTRUCCIÓN DEL EMAIL ───────────────────────────────────────
 $service_labels = [
     'seo'      => 'Posicionamiento SEO',
     'web'      => 'Desarrollo Web',

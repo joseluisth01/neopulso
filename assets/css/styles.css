@@ -193,7 +193,7 @@ section{padding-block:var(--s24)}
 .ps h3{font-size:var(--base);font-weight:700;margin-bottom:var(--s2)}
 .ps p{font-size:var(--sm);color:var(--muted);line-height:1.6}
 
-/* ── FAQ ──────────────────────────────────────────────────────── */
+/* ── FAQ ──ss────────────────────────────────────────────────────── */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);max-width:920px;margin-inline:auto}
 details.faq{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;transition:border-color var(--tr)}
 details.faq[open],details.faq:hover{border-color:var(--border-h)}
