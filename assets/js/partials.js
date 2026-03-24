@@ -1,12 +1,28 @@
 'use strict';
 /* ================================================================
-   NEOPULSO — partials.js  v2.0
-   Header y footer globales. Editar solo aquí.
+   NEOPULSO — partials.js  v2.1
+   Header, footer y scripts globales. Editar solo aquí.
 ================================================================ */
 (function () {
+
+  /* ── Google Analytics 4 ─────────────────────────────────────── */
+  (function injectGA() {
+    var s1 = document.createElement('script');
+    s1.async = true;
+    s1.src   = 'https://www.googletagmanager.com/gtag/js?id=G-NE479VCBW0';
+    document.head.appendChild(s1);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-NE479VCBW0');
+  })();
+
+  /* ── Detección de ruta ──────────────────────────────────────── */
   const path = window.location.pathname.replace(/\/$/, '');
   const slug = path.split('/').pop() || '';
-  const isHome = slug === '' || slug === 'index';
+  const isHome    = slug === '' || slug === 'index';
   const isContact = slug === 'contacto';
 
   const SERVICE_SLUGS = [
@@ -15,11 +31,11 @@
   ];
   const isService = SERVICE_SLUGS.includes(slug);
 
-  /* ── Logo ───────────s───────────────────────────────────── */
+  /* ── Logo ───────────────────────────────────────────────────── */
   const logoHref = isHome ? '#' : '/';
   const LOGO_SVG = `<svg width="26" height="26" viewBox="0 0 28 28" fill="none"><polyline points="2,14 7,14 10,5 14,23 18,9 21,14 26,14" stroke="var(--cyan)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  /* ── Mega-menú ─────────────────────────────────────────── */
+  /* ── Mega-menú ─────────────────────────────────────────────── */
   const SERVICES = [
     { href:'agencia-seo',            name:'Posicionamiento SEO',    sub:'Primeros resultados en Google',
       icon:`<circle cx="11" cy="11" r="8" stroke="var(--cyan)" stroke-width="1.7"/><path d="m21 21-4.35-4.35" stroke="var(--cyan)" stroke-width="1.7" stroke-linecap="round"/>` },
@@ -46,13 +62,13 @@
       </div>
     </a>`).join('');
 
-  /* ── Nav links ─────────────────────────────────────────── */
+  /* ── Nav links ─────────────────────────────────────────────── */
   const navLink = (href, label) => {
     const active = href === slug || (isContact && href === 'contacto');
     return `<li class="nav-item"><a href="${href}"${active?' class="active" aria-current="page"':''}>${label}</a></li>`;
   };
 
-  /* ── HEADER HTML ───────────────────────────────────────── */
+  /* ── HEADER HTML ───────────────────────────────────────────── */
   const HEADER = `
 <header class="site-header" id="site-header" role="banner">
   <div class="container header-inner">
@@ -84,7 +100,7 @@
   </div>
 </header>`;
 
-  /* ── FOOTER HTML ───────────────────────────────────────── */
+  /* ── FOOTER HTML ───────────────────────────────────────────── */
   const footerLinks = SERVICES.map(s =>
     `<li><a href="${s.href}"${s.href===slug?' aria-current="page"':''}>${s.name}</a></li>`
   ).join('');
@@ -141,13 +157,13 @@
   </div>
 </footer>`;
 
-  /* ── Inject ─────────────────────────────────────────────── */
+  /* ── Inject ─────────────────────────────────────────────────── */
   const hs = document.getElementById('site-header-slot');
   const fs = document.getElementById('site-footer-slot');
   if (hs) hs.outerHTML = HEADER;
   if (fs) fs.outerHTML = FOOTER;
 
-  /* ── Mega-menu logic (after injection) ──────────────────── */
+  /* ── Mega-menu logic ────────────────────────────────────────── */
   requestAnimationFrame(function initMega() {
     const item = document.querySelector('.nav-has-mega');
     if (!item) return;
