@@ -445,7 +445,7 @@ document.addEventListener('click', e => {
     if (!validate()) return;
     btn.disabled = true; btn.textContent = 'Enviando…';
     try {
-      const res = await fetch('assets/php/contact.php', { method: 'POST', body: new FormData(form) });
+      const res = await fetch('/contact.php', { method: 'POST', body: new FormData(form) });
       const data = await res.json();
       if (data.ok) { form.style.display = 'none'; if (success) success.hidden = false; }
       else throw new Error(data.message || 'Error desconocido');
